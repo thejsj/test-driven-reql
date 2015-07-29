@@ -1,0 +1,17 @@
+{
+  "name": "test-driven-reql",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel/register test/index"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^5.8.12",
+    "mocha": "^2.2.5",
+    "rethinkdb": "^2.0.2",
+    "should": "^7.0.2"
+  }
+}
