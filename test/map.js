@@ -16,6 +16,10 @@ describe('Map', function () {
           return;
         });
       })
+      .catch(function (err) {
+        console.log('ERROR@!@@@', err);
+        throw err;
+      })
       .nodeify(done);
   });
 
@@ -29,7 +33,7 @@ describe('Map', function () {
 
   // #1
   it('should map all rows to the `population` property from each document', function (done) {
-    r.table('test_driven_reql')
+    r.table('countries')
       .map(function (row) {
         return row('population');
       })
@@ -43,10 +47,10 @@ describe('Map', function () {
   });
 
   // #2
-  it('should map all rows to an array with `id` and `population` from each document', function (done) {
-    r.table('test_driven_reql')
+  it('should map all rows to an array with `name` and `population` from each document', function (done) {
+    r.table('countries')
       .map(function (row) {
-        return [row('id'), row('population')];
+        return [row('name'), row('population')];
       })
       .coerceTo('array')
       .run(r.conn)
@@ -62,7 +66,7 @@ describe('Map', function () {
 
   // #3
   it('should map the result of dividing `population` by `percentage_of_population`', function (done) {
-    r.table('test_driven_reql')
+    r.table('countries')
       .map(function (row) {
         return row('population').div(row('percentage_of_population').coerceTo('number'));
       })

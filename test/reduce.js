@@ -29,7 +29,7 @@ describe('Reduce', function () {
 
   // #1
   it('should get the total population for all countries (without using `sum`)', function (done) {
-    r.table('test_driven_reql')
+    r.table('countries')
       .map(function (row) {
         return row('population');
       })
@@ -46,7 +46,7 @@ describe('Reduce', function () {
 
   // #2
   it('should get the number of countries (using `reduce` and not `count`)', function (done) {
-    r.table('test_driven_reql')
+    r.table('countries')
       .map(function (row) {
         return 1;
       })
@@ -55,7 +55,7 @@ describe('Reduce', function () {
       })
       .run(r.conn)
       .then(function (result) {
-        return r.table('test_driven_reql').count().run(r.conn)
+        return r.table('countries').count().run(r.conn)
         .then(function (count) {
           result.should.be.a.Number;
           count.should.equal(result);
@@ -67,7 +67,7 @@ describe('Reduce', function () {
 
   // #3
   it('should find whether any country has the substring `ze` (using `reduce` and without using `count`)', function (done) {
-    r.table('test_driven_reql')
+    r.table('countries')
       .map(function (row) {
         return row('name').match('ze').ne(null);
       })

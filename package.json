@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --compilers js:babel/register test/index"
+    "test": "./node_modules/mocha/bin/mocha --slow 1 --compilers js:babel/register test/index"
   },
   "author": "",
   "license": "ISC",
