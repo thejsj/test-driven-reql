@@ -77,10 +77,33 @@ describe('Subqueries', function () {
             row.cities[0].should.have.property('density');
             row.cities[0].should.have.property('country');
           }
-
         });
        })
        .nodeify(done);
   });
+
+  // #3
+  it('should get all countries with a population smaller than New York City', function (done) {
+    r.table('cities').filter(function (row) {
+      return row('name').match('New York City');
+    })(0)('population')
+      .do(function (population) {
+        return r.table('countries').filter(function (row) {
+          return row('population').le(population);
+        });
+      })
+      .coerceTo('array')
+      .run(r.conn)
+      .then(function (result) {
+        Array.isArray(result).should.be.True;
+        result.every(function (row) {
+          row.name.should.be.a.String;
+          row.population.should.be.a.Number;
+          row.population.should.be.below(20630000);
+        });
+       })
+       .nodeify(done);
+  });
+
 
 });

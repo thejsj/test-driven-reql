@@ -6,7 +6,7 @@ import * as utils from './utils';
 describe('Map', function () {
 
   before(function (done) {
-    this.timeout(5000);
+    this.timeout(7500);
     return utils.createDatabase()
       .then(utils.insertSampleData)
       .then(() => {
