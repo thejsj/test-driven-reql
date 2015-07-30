@@ -36,8 +36,12 @@ describe('Reduce', function () {
       .then(function (result) {
         result.should.be.a.Number;
         result.should.be.greaterThan(6000000000);
+        return true;
       })
-      .nodeify(done);
+      .nodeify(function (err, res) {
+        console.log(err, res);
+        done(err, res);
+      });
   });
 
   // #2
@@ -55,7 +59,10 @@ describe('Reduce', function () {
           return true;
         });
       })
-      .nodeify(done);
+      .nodeify(function (err, res) {
+        console.log(err, res);
+        done(err, res);
+      });
   });
 
   // #3 (Optional)
@@ -72,7 +79,10 @@ describe('Reduce', function () {
         result.should.be.a.Boolean;
         result.should.equal(true);
       })
-      .nodeify(done);
+      .nodeify(function (err, res) {
+        console.log(err, res);
+        done(err, res);
+      });
   });
 
 });
