@@ -33,6 +33,8 @@ describe('Indexes', function () {
 
   // #1
   it('should create a secondary index for the `population` property', function (done) {
+    // HINT: You'll need to use `indexCreate`
+    // http://rethinkdb.com/api/javascript/index_create/
     r.table('countries').indexCreate('population').run(r.conn)
      .then(function () {
        return r.table('countries').indexWait().run(r.conn);
@@ -50,6 +52,8 @@ describe('Indexes', function () {
 
   // #2
   it('should create a compound index for the `area` and `population` properties', function (done) {
+    // HINT: You'll need to use a compound index
+    // http://rethinkdb.com/docs/secondary-indexes/javascript/#compound-indexes
     r.table('cities')
      .indexCreate('area_population', [r.row('area'), r.row('population')])
      .run(r.conn)
@@ -69,6 +73,8 @@ describe('Indexes', function () {
 
   // #3
   it('should create an index using an arbitrary expression for cities with a `rank` in the top 100', function (done) {
+    // HINT: You'll need to use an index function
+    // http://rethinkdb.com/docs/secondary-indexes/javascript/#indexes-on-arbitrary-reql-expressions
     r.table('cities')
      .indexCreate('top_100', function (row) {
        return row('rank').le(100);
@@ -88,8 +94,11 @@ describe('Indexes', function () {
      .nodeify(done);
   });
 
-  // #4
+  // #4 (Optional)
   it('should create an index for all the letters in a city\'s name using an index function and a multi index', function (done) {
+    // HINT: You'll need to use index functions, multi-indexes, and `split`
+    // http://rethinkdb.com/docs/secondary-indexes/javascript/#multi-indexes
+    // http://rethinkdb.com/api/javascript/split/
     r.table('countries')
      .indexCreate('letters', function (row) {
        return row('name').split('');

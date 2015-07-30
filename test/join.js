@@ -29,6 +29,9 @@ describe('Join', function () {
 
   // #1
   it('should join each city to its respective country using `zip`', function (done) {
+    // HINT: You'll need to use the `eqJoin` and `zip` terms
+    // http://rethinkdb.com/api/javascript/eq_join/
+    // http://rethinkdb.com/api/javascript/zip/
     r.table('cities')
       .eqJoin('country', r.table('countries'))
       .zip()
@@ -50,6 +53,8 @@ describe('Join', function () {
 
   // #2
   it('should join each city to its respective country through a `country` property', function (done) {
+    // HINT: You'll need to use `map` and `merge`
+    // http://rethinkdb.com/api/javascript/merge/
     r.table('cities')
       .eqJoin('country', r.table('countries'))
       .map(function (row) {

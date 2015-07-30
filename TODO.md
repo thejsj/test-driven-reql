@@ -1,6 +1,6 @@
 # TODO
 
-[ ] Update README
+[x] Update README
 [x] Finish indexes
 [ ] Remove solutions
 [ ] Add comments and hints

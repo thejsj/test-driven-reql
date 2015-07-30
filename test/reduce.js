@@ -29,6 +29,7 @@ describe('Reduce', function () {
 
   // #1
   it('should get the total population for all countries (without using `sum`)', function (done) {
+    // HINT: You'll need to use the `map` term
     r.table('countries')
       .map(function (row) {
         return row('population');
@@ -46,6 +47,8 @@ describe('Reduce', function () {
 
   // #2
   it('should get the number of countries (using `reduce` and not `count`)', function (done) {
+    // HINT: You'll need to use the `map` term
+    // HINT: It's easier than you think
     r.table('countries')
       .map(function (row) {
         return 1;
@@ -65,8 +68,13 @@ describe('Reduce', function () {
       .nodeify(done);
   });
 
-  // #3
+  // #3 (Optional)
   it('should find whether any country has the substring `ze` (using `reduce` and without using `count`)', function (done) {
+    // HINT: You'll need to use the `match` term
+    // http://rethinkdb.com/api/javascript/match/
+    // HINT: The `map` function should return a boolean
+    // HINT: You'll need to use the `branch` term
+    // http://rethinkdb.com/api/javascript/branch/
     r.table('countries')
       .map(function (row) {
         return row('name').match('ze').ne(null);

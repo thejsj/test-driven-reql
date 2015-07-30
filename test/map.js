@@ -33,6 +33,12 @@ describe('Map', function () {
 
   // #1
   it('should map all rows to the `population` property from each document', function (done) {
+    // HINT: Make sure to use the `map` function
+    // HINT: Make sure you understand the difference between cursors and arrays
+    // http://rethinkdb.com/api/javascript/run/
+    // http://rethinkdb.com/api/javascript/next/
+    // HINT: A quick and simple way to convert cursor to arrays is to use `coerceTo`
+    // http://rethinkdb.com/api/javascript/coerce_to/
     r.table('countries')
       .map(function (row) {
         return row('population');
@@ -48,6 +54,7 @@ describe('Map', function () {
 
   // #2
   it('should map all rows to an array with `name` and `population` from each document', function (done) {
+    // HINT: The map function should return an array
     r.table('countries')
       .map(function (row) {
         return [row('name'), row('population')];
@@ -64,8 +71,10 @@ describe('Map', function () {
      .nodeify(done);
   });
 
-  // #3
+  // #3 (Optional)
   it('should map the result of dividing `population` by `percentage_of_population`', function (done) {
+    // HINT: You'll need to use the `coerceTo` term
+    // http://rethinkdb.com/api/javascript/coerce_to/
     r.table('countries')
       .map(function (row) {
         return row('population').div(row('percentage_of_population').coerceTo('number'));

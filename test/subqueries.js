@@ -29,6 +29,8 @@ describe('Subqueries', function () {
 
    // #1
   it('should join each city to its respective country through a `country` property (without `eqJoin`)', function (done) {
+    // HINT: You'll need to use `merge`
+    // http://rethinkdb.com/api/javascript/merge/
     r.table('cities')
       .merge(function (row) {
         return {
@@ -55,6 +57,8 @@ describe('Subqueries', function () {
 
   // #2
   it('should join each country to its respective city through a `cities` property (without `eqJoin`)', function (done) {
+    // HINT: You'll need to use `filter`, `coerceTo`, and `default`
+    // http://rethinkdb.com/api/javascript/default/
     r.table('countries')
       .merge(function (row) {
         return {
@@ -82,8 +86,11 @@ describe('Subqueries', function () {
        .nodeify(done);
   });
 
-  // #3
+  // #3 (Optional)
   it('should get all countries with a population smaller than New York City', function (done) {
+    // HINT: You'll need to use `match` and `do`
+    // http://rethinkdb.com/api/javascript/match/
+    // http://rethinkdb.com/api/javascript/do/
     r.table('cities').filter(function (row) {
       return row('name').match('New York City');
     })(0)('population')
