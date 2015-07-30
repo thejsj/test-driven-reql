@@ -40,7 +40,9 @@ describe('Changefeeds', function () {
     // HINT: You'll need to use `changes` and understand cursors
     // http://rethinkdb.com/api/javascript/changes/
     // http://rethinkdb.com/api/javascript/each/ (Already written)
-    r.table('countries').changes().run(r.conn)
+    r.table('countries')
+      // Your code here...
+      .run(r.conn)
       .then(function (cursor) {
         cursor.each(function (err, row) {
           count++;
@@ -70,7 +72,8 @@ describe('Changefeeds', function () {
     var count = 0, results = [], cursor;
     // HINT: You'll need to write the query after `.changes`
     r.connect().then((conn) => {
-    return r.table('countries').changes()('new_val').run(conn)
+    return r.table('countries')
+      // Your code here...
       .then(function (_cursor) {
         cursor = _cursor;
         cursor.each(function (err, row) {
@@ -108,7 +111,8 @@ describe('Changefeeds', function () {
     var count = 0, results = [], cursor;
     // HINT: You'll need to write the query before `.changes`
     r.connect().then((conn) => {
-    return r.table('countries').filter({ name: 'Cascadia' }).changes().run(conn)
+    return r.table('countries')
+      // Your code here...
       .then(function (_cursor) {
         cursor = _cursor;
         cursor.each(function (err, row) {
@@ -139,19 +143,17 @@ describe('Changefeeds', function () {
     });
   });
 
-  // #4
-  it('should listen for changes in the `countries` table, but only listen for countries with a population over 1000 and only get its population', function (done) {
+  // #4 (Optional)
+  xit('should listen for changes in the `countries` table, but only listen for countries with a population over 1000 and only get its population', function (done) {
     var count = 0, results = [], cursor;
     // HINT: You'll need to pass an anonymous function to `filter`
     r.connect().then((conn) => {
-    return r.table('countries').filter(function (row) {
-      return row('population').gt(1000);
-    }).pluck('population').changes().run(conn)
+    return r.table('countries')
+       // Your code here...
       .then(function (_cursor) {
         cursor = _cursor;
         cursor.each(function (err, row) {
-          count++;
-          results.push(row);
+          // Your code here..
         });
       })
       .then(function () {

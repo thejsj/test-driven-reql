@@ -32,11 +32,7 @@ describe('Subqueries', function () {
     // HINT: You'll need to use `merge`
     // http://rethinkdb.com/api/javascript/merge/
     r.table('cities')
-      .merge(function (row) {
-        return {
-          'country': r.table('countries').get(row('country'))
-        };
-      })
+       // Your code here...
       .coerceTo('array')
       .run(r.conn)
       .then(function (result) {
@@ -60,11 +56,7 @@ describe('Subqueries', function () {
     // HINT: You'll need to use `filter`, `coerceTo`, and `default`
     // http://rethinkdb.com/api/javascript/default/
     r.table('countries')
-      .merge(function (row) {
-        return {
-          'cities': r.table('cities').filter({ country: row('country') }).coerceTo('array').default([])
-        };
-      })
+      // Your code here...
       .coerceTo('array')
       .run(r.conn)
       .then(function (result) {
@@ -87,17 +79,14 @@ describe('Subqueries', function () {
   });
 
   // #3 (Optional)
-  it('should get all countries with a population smaller than New York City', function (done) {
+  xit('should get all countries with a population smaller than New York City', function (done) {
     // HINT: You'll need to use `match` and `do`
     // http://rethinkdb.com/api/javascript/match/
     // http://rethinkdb.com/api/javascript/do/
-    r.table('cities').filter(function (row) {
-      return row('name').match('New York City');
-    })(0)('population')
+    r.table('cities')
+      // Your code here...
       .do(function (population) {
-        return r.table('countries').filter(function (row) {
-          return row('population').le(population);
-        });
+        // Your code here...
       })
       .coerceTo('array')
       .run(r.conn)

@@ -31,12 +31,7 @@ describe('Reduce', function () {
   it('should get the total population for all countries (without using `sum`)', function (done) {
     // HINT: You'll need to use the `map` term
     r.table('countries')
-      .map(function (row) {
-        return row('population');
-      })
-      .reduce(function (left, right) {
-        return left.add(right);
-      })
+       // Your code here...
       .run(r.conn)
       .then(function (result) {
         result.should.be.a.Number;
@@ -50,13 +45,8 @@ describe('Reduce', function () {
     // HINT: You'll need to use the `map` term
     // HINT: It's easier than you think
     r.table('countries')
-      .map(function (row) {
-        return 1;
-      })
-      .reduce(function (left, right) {
-        return left.add(right);
-      })
-      .run(r.conn)
+      // Your code here...
+     .run(r.conn)
       .then(function (result) {
         return r.table('countries').count().run(r.conn)
         .then(function (count) {
@@ -69,29 +59,20 @@ describe('Reduce', function () {
   });
 
   // #3 (Optional)
-  it('should find whether any country has the substring `ze` (using `reduce` and without using `count`)', function (done) {
+  xit('should find whether any country has the substring `ze` (using `reduce` and without using `count`)', function (done) {
     // HINT: You'll need to use the `match` term
     // http://rethinkdb.com/api/javascript/match/
     // HINT: The `map` function should return a boolean
     // HINT: You'll need to use the `branch` term
     // http://rethinkdb.com/api/javascript/branch/
     r.table('countries')
-      .map(function (row) {
-        return row('name').match('ze').ne(null);
-      })
-      .reduce(function (left, right) {
-        return r.branch(
-          left.or(right),
-          true,
-          false
-        );
-      })
+      // Your code here..
       .run(r.conn)
-     .then(function (result) {
-       result.should.be.a.Boolean;
-       result.should.equal(true);
-     })
-     .nodeify(done);
+      .then(function (result) {
+        result.should.be.a.Boolean;
+        result.should.equal(true);
+      })
+      .nodeify(done);
   });
 
 });

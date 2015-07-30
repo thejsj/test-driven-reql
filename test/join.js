@@ -33,8 +33,7 @@ describe('Join', function () {
     // http://rethinkdb.com/api/javascript/eq_join/
     // http://rethinkdb.com/api/javascript/zip/
     r.table('cities')
-      .eqJoin('country', r.table('countries'))
-      .zip()
+       // Your code here...
       .coerceTo('array')
       .run(r.conn)
       .then(function (result) {
@@ -56,10 +55,7 @@ describe('Join', function () {
     // HINT: You'll need to use `map` and `merge`
     // http://rethinkdb.com/api/javascript/merge/
     r.table('cities')
-      .eqJoin('country', r.table('countries'))
-      .map(function (row) {
-        return row('left').merge({ 'country': row('right') });
-      })
+       // Your code here...
       .coerceTo('array')
       .run(r.conn)
       .then(function (result) {

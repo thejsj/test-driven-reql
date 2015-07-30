@@ -35,12 +35,16 @@ describe('Indexes', function () {
   it('should create a secondary index for the `population` property', function (done) {
     // HINT: You'll need to use `indexCreate`
     // http://rethinkdb.com/api/javascript/index_create/
-    r.table('countries').indexCreate('population').run(r.conn)
+    // HINT: You'll need to use `orderBy` and `r.desc`
+    // http://rethinkdb.com/api/javascript/order_by/
+    r.table('countries')
+      // Your code here...
+      .run(r.conn)
      .then(function () {
        return r.table('countries').indexWait().run(r.conn);
      })
      .then(function () {
-       return r.table('countries').orderBy({ index: r.desc('population') }).coerceTo('array').run(r.conn);
+       // Your code here...
      })
      .then(function (res) {
        res.should.be.instanceOf(Array);
@@ -55,7 +59,7 @@ describe('Indexes', function () {
     // HINT: You'll need to use a compound index
     // http://rethinkdb.com/docs/secondary-indexes/javascript/#compound-indexes
     r.table('cities')
-     .indexCreate('area_population', [r.row('area'), r.row('population')])
+      // Your code here...
      .run(r.conn)
      .then(function () {
        return r.table('cities').indexWait().run(r.conn);
@@ -71,21 +75,18 @@ describe('Indexes', function () {
      .nodeify(done);
   });
 
-  // #3
-  it('should create an index using an arbitrary expression for cities with a `rank` in the top 100', function (done) {
+  // #3 (Optional)
+  xit('should create an index using an arbitrary expression for cities with a `rank` in the top 100', function (done) {
     // HINT: You'll need to use an index function
     // http://rethinkdb.com/docs/secondary-indexes/javascript/#indexes-on-arbitrary-reql-expressions
     r.table('cities')
-     .indexCreate('top_100', function (row) {
-       return row('rank').le(100);
-     })
-     .run(r.conn)
+      // Your code here...
+    .run(r.conn)
      .then(function () {
        return r.table('cities').indexWait().run(r.conn);
      })
      .then(function () {
-       return r.table('cities').getAll(true, { index: 'top_100' })
-        .coerceTo('array').run(r.conn);
+       // Your code here...
      })
      .then(function (res) {
        res.should.be.instanceOf(Array);
@@ -95,21 +96,18 @@ describe('Indexes', function () {
   });
 
   // #4 (Optional)
-  it('should create an index for all the letters in a city\'s name using an index function and a multi index', function (done) {
+  xit('should create an index for all the letters in a city\'s name using an index function and a multi index', function (done) {
     // HINT: You'll need to use index functions, multi-indexes, and `split`
     // http://rethinkdb.com/docs/secondary-indexes/javascript/#multi-indexes
     // http://rethinkdb.com/api/javascript/split/
     r.table('countries')
-     .indexCreate('letters', function (row) {
-       return row('name').split('');
-     }, { multi: true })
-     .run(r.conn)
+      // Your code here...
+    .run(r.conn)
      .then(function () {
        return r.table('countries').indexWait().run(r.conn);
      })
      .then(function () {
-       return r.table('countries').getAll('z', { index: 'letters' })
-        .coerceTo('array').run(r.conn);
+       // Your code here...
      })
      .then(function (res) {
        res.should.be.instanceOf(Array);
