@@ -2,6 +2,14 @@
 
 *Learn ReQL+RethinkDB by making tests pass.*
 
+Go from this:
+
+![screenshot-before](screenshot-before.png)
+
+To this:
+
+![screenshot-after](screenshot-after.png)
+
 ## Setup
 
 1. [Install RethinkDB](http://rethinkdb.com/install)
